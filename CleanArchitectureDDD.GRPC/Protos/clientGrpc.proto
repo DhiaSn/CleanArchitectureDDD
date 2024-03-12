@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+option csharp_namespace = "CleanArchitectureDDD.gRPC";
+import "google/api/annotations.proto"; 
+import "google/protobuf/timestamp.proto";
+
+package clientGrpc;
+
+service clientGrpc {
+	rpc GetAll (GetAllClientRequest) returns (GetAllClientResponse) {
+		option (google.api.http) = {
+			get: "/api/clients"
+		};
+	}
+	rpc GetById (ClientByIdRequest) returns (GetClientByIdResponse) {
+		option (google.api.http) = {
+			get: "/api/clients/{id}"
+		};
+	}
+	rpc Post (PostClientRequest) returns (PostClientResponse) {
+		option (google.api.http) = {
+			post: "/api/clients"
+			body: "*"
+		};
+	}
+	rpc Put (PutClientRequest) returns (PutClientResponse) {
+		option (google.api.http) = {
+			put: "/api/clients/{id}"
+			body: "*"
+		};
+	}
+	rpc Delete (ClientByIdRequest) returns (Empty) {
+		option (google.api.http) = {
+			delete: "/api/clients"
+		};
+	}
+	rpc AddCarAsync(PostCarRequest) returns (GetClientByIdResponse) {
+		option (google.api.http) = {
+			post: "/api/clients/car/{client_id}"
+			body: "*"
+		};
+	}
+}
+
+message Empty {}
+
+message ClientByIdRequest {
+  string id = 1;
+}
+
+message GetAllClientRequest {
+	int32 pageNumber = 1; 
+	int32 pageSize = 2; 
+}
+
+message GetAllClientItemResponse {
+  string id = 1;
+  string phone_number = 2;
+  int32 age = 3;
+}
+
+message GetAllClientResponse {
+	repeated GetAllClientItemResponse clients = 1; 
+}
+
+
+message GetClientByIdResponse {
+  string id = 1;
+  string phone_number = 2;
+  int32 age = 3;
+  google.protobuf.Timestamp created_date = 4;
+  google.protobuf.Timestamp updated_date = 5;
+  repeated GetCarByIdResponse cars = 6;
+}
+
+message PostClientRequest {
+  string phone_number = 1;
+  int32 age = 2;
+}
+
+message PostClientResponse {
+  string id = 1;
+  string phone_number = 2;
+  int32 age = 3;
+  google.protobuf.Timestamp created_date = 4;
+  google.protobuf.Timestamp updated_date = 5;
+}
+
+message PutClientRequest {
+  string id = 1;
+  string phone_number = 2;
+  int32 age = 3;
+}
+
+message PutClientResponse {
+  string id = 1;
+  string phone_number = 2;
+  int32 age = 3;
+  google.protobuf.Timestamp created_date = 4;
+  google.protobuf.Timestamp updated_date = 5;
+}
+
+message GetCarByIdResponse {
+	string id = 1;
+	google.protobuf.Timestamp created_date = 2;
+	google.protobuf.Timestamp updated_date = 3;
+	string brand = 4;
+	double mileage = 5;
+}
+
+message PostCarRequest {
+  string brand = 1;
+  double mileage = 2;
+  string client_id = 3;
+}

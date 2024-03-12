@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureDDD.API", "CleanArchitectureDDD\CleanArchitectureDDD.API.csproj", "{FFF84331-6A8B-4227-969C-AB1B7BB31B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureDDD.API", "CleanArchitectureDDD\CleanArchitectureDDD.API.csproj", "{FFF84331-6A8B-4227-969C-AB1B7BB31B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureDDD.Core", "CleanArchitectureDDD.Core\CleanArchitectureDDD.Core.csproj", "{D368F027-8D15-4EDD-949D-EBFDA20EE22A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureDDD.Core", "CleanArchitectureDDD.Core\CleanArchitectureDDD.Core.csproj", "{D368F027-8D15-4EDD-949D-EBFDA20EE22A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureDDD.Infrastructure", "CleanArchitectureDDD.Infrastructure\CleanArchitectureDDD.Infrastructure.csproj", "{70EA20DB-F93E-4ED2-B752-8DF544F73138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureDDD.Infrastructure", "CleanArchitectureDDD.Infrastructure\CleanArchitectureDDD.Infrastructure.csproj", "{70EA20DB-F93E-4ED2-B752-8DF544F73138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureDDD.App", "CleanArchitectureDDD.App\CleanArchitectureDDD.App.csproj", "{4A91699A-523B-4393-89BF-4B2FF3F6BF87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureDDD.App", "CleanArchitectureDDD.App\CleanArchitectureDDD.App.csproj", "{4A91699A-523B-4393-89BF-4B2FF3F6BF87}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureDDD.gRPC", "CleanArchitectureDDD.GRPC\CleanArchitectureDDD.gRPC.csproj", "{3B851496-4E4A-40A3-8639-0677A706774C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4A91699A-523B-4393-89BF-4B2FF3F6BF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A91699A-523B-4393-89BF-4B2FF3F6BF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A91699A-523B-4393-89BF-4B2FF3F6BF87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B851496-4E4A-40A3-8639-0677A706774C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B851496-4E4A-40A3-8639-0677A706774C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B851496-4E4A-40A3-8639-0677A706774C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B851496-4E4A-40A3-8639-0677A706774C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

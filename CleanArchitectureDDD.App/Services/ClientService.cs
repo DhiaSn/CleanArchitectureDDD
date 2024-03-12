@@ -110,7 +110,7 @@ namespace CleanArchitectureDDD.App.Services
             if (client == null)
                 return new Response<Client>
                 {
-                    Message = "Clientdoesn't exist...",
+                    Message = "Client doesn't exist...",
                     Succeeded = false,
                 };
 
