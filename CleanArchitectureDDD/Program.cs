@@ -4,6 +4,7 @@ using CleanArchitectureDDD.App;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitectureDDD.Infrastructure.Data;
 using Serilog;
+using Serilog.Extensions.Hosting;
 
 namespace CleanArchitectureDDD.API
 {
@@ -11,53 +12,48 @@ namespace CleanArchitectureDDD.API
     {
         public static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+            var builder = WebApplication.CreateBuilder(args);
 
-            try
-            {
-                Log.Information("Starting web application");
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.Console()
+                .Enrich.FromLogContext()
+                .WriteTo.File($"logs/CleanArchitectureLog-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
 
-                var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddControllers();
 
-                builder.Host.UseSerilog();
+            builder.Host.UseSerilog();
 
-                // Add services to the container.
-                builder.Services.AddControllers();
-                builder.Services.AddPersistenceInfrastructure(builder.Configuration);
-                builder.Services.AddSharedInfrastructure(builder.Configuration);
-                builder.Services.AddApplicationLayer(); 
+            // Add services to the container.
+            builder.Services.AddControllers();
+            builder.Services.AddPersistenceInfrastructure(builder.Configuration);
+            builder.Services.AddSharedInfrastructure(builder.Configuration);
+            builder.Services.AddApplicationLayer();
 
-                // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-                builder.Services.AddEndpointsApiExplorer();
-                builder.Services.AddSwagger();
-                builder.Services.AddHealthChecks();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwagger();
+            builder.Services.AddHealthChecks();
 
-                var app = builder.Build();
+            var app = builder.Build();
 
-                app.UseSerilogRequestLogging();
-                // Configure the HTTP request pipeline.
-                app.UseAppSwagger();
+            // Configure the HTTP request pipeline.
+            app.UseAppSwagger();
 
-                app.UseHttpsRedirection();
+            app.UseSerilogRequestLogging();
 
-                app.UseAuthorization();
+            app.UseHttpsRedirection();
 
-                app.UseErrorHandlingMiddleware();
+            app.UseAuthorization();
 
-                app.UseHealthChecks("/health");
+            app.UseErrorHandlingMiddleware();
 
-                app.MapControllers();
+            app.UseHealthChecks("/health");
 
-                app.Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application terminated unexpectedly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            app.MapControllers();
+
+            app.Run();
 
         }
     }

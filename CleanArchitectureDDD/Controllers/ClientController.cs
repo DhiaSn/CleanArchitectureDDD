@@ -8,9 +8,10 @@ namespace CleanArchitectureDDD.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController(IClientService clientService) : ControllerBase
+    public class ClientController(IClientService clientService, ILogger<ClientController> logger) : ControllerBase
     {
         private readonly IClientService _clientService = clientService;
+        private readonly ILogger<ClientController> _logger = logger;
 
         #region GetAll
         [HttpGet]
