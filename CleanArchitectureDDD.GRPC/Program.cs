@@ -2,6 +2,7 @@ using CleanArchitectureDDD.gRPC.Exentions;
 using CleanArchitectureDDD.gRPC.Services;
 using CleanArchitectureDDD.Infrastructure;
 using CleanArchitectureDDD.App;
+using Serilog;
 
 namespace CleanArchitectureDDD.gRPC
 {
@@ -11,7 +12,16 @@ namespace CleanArchitectureDDD.gRPC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Information()
+               .WriteTo.Console()
+               .Enrich.FromLogContext()
+               .WriteTo.File($"logs/CleanArchitectureLog-.txt", rollingInterval: RollingInterval.Day)
+               .CreateLogger();
+
             // Add services to the container.
+            builder.Host.UseSerilog();
+
             builder.Services.AddGrpc().AddJsonTranscoding();
             builder.Services.AddSwagger(); 
             builder.Services.AddPersistenceInfrastructure(builder.Configuration);
@@ -20,7 +30,8 @@ namespace CleanArchitectureDDD.gRPC
 
             var app = builder.Build();
 
-            app.UseAppSwagger(); 
+            app.UseAppSwagger();
+            app.UseSerilogRequestLogging();
 
             // Configure the HTTP request pipeline.
             app.AddGrpcServices();
