@@ -38,6 +38,7 @@ The project is organized into four primary layers, each serving a distinct purpo
 ### Folder Structure
 Below is the detailed project structure:
 
+```
 CleanArchitectureDDD/
 ├── CleanArchitectureDDD.Core/
 │   ├── Entities/
@@ -83,7 +84,7 @@ CleanArchitectureDDD/
 │   │   └── ...
 │   └── ...
 └── ...
-
+```
 
 ## Key Features
 - **Clean Architecture**: Ensures modularity and separation of concerns.
