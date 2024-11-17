@@ -1,58 +1,96 @@
-# ASP.NET API with Domain-Driven Design (DDD) Architecture
+# CleanArchitectureDDD
 
-Welcome to this ASP.NET API project implementing Domain-Driven Design (DDD) architecture. This project is crafted with a focus on best practices, emphasizing the right separation of concerns to enhance code extensibility and scalability based on your evolving needs.
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Introduction
-Domain-Driven Design (DDD) is an approach to software development that prioritizes the modeling of the business domain to create a flexible and maintainable codebase. This project aims to demonstrate the implementation of DDD principles in an ASP.NET API, showcasing how the codebase can evolve with the business requirements.
-
-## Features
-- **Modularity:** The codebase is organized into distinct modules, each focusing on a specific aspect of the business domain.
-- **Separation of Concerns:** DDD principles such as Entities, Value Objects, Aggregates, and Repositories are implemented to ensure proper separation of concerns.
-- **Scalability:** The architecture is designed to facilitate easy scalability by allowing new features to be added without significant modification of existing code.
-
-## Getting Started
-To get started with this project, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/DhiaSn/CleanArchitectureDDD.git 
-   cd your-repo
-   ```
-
-2. Build and run the project:
-   ```bash
-   dotnet build
-   dotnet run
-   ```
+## Overview
+CleanArchitectureDDD is a modular project implementing the Clean Architecture design pattern. The solution emphasizes separation of concerns and scalability, ensuring maintainability and testability.
 
 ## Project Structure
-The project is structured following DDD principles:
+The project is organized into four primary layers, each serving a distinct purpose:
 
-- **src:** Contains the source code of the ASP.NET API.
-  - **Domain:** Core business logic and domain entities.
-  - **App:** Application services and use cases.
-  - **Infrastructure:** External dependencies, data access, and cross-cutting concerns.
-  - **API:** 
+### 1. **Core Layer (`CleanArchitectureDDD.Core`)**
+   - Defines the core domain logic and business rules.
+   - Independent of any external dependencies.
+   - **Key Components**:
+     - **Entities**: Domain models (e.g., `Car.cs`, `Client.cs`).
+     - **Interfaces**: Contracts for repositories and services (e.g., `IGenericRepository.cs`).
+     - **Specifications**: Encapsulates query logic for reuse (e.g., `BaseSpecification.cs`).
 
-- **tests:** Unit tests for the application.
+### 2. **Application Layer (`CleanArchitectureDDD.App`)**
+   - Implements use cases and application-specific logic.
+   - Bridges the Core layer with Infrastructure and GRPC layers.
+   - **Key Components**:
+     - **DTOs**: Data Transfer Objects for communication (e.g., `ClientDto.cs`).
+     - **Services**: Business logic implementations (e.g., `ClientService.cs`).
+     - **Wrappers**: Standardized response objects (e.g., `Response.cs`).
 
-## Technologies Used
-- ASP.NET Core
-- Entity Framework Core
-- Serilog
-- 
+### 3. **Infrastructure Layer (`CleanArchitectureDDD.Infrastructure`)**
+   - Handles database interactions, external services, and configurations.
+   - **Key Components**:
+     - **Data**: Entity Framework database context and seeding logic.
+     - **Repositories**: Concrete repository implementations.
+     - **Migrations**: Database migration scripts for schema management.
 
-## Contributing
-Contributions are welcome! If you find a bug, have a feature request, or want to contribute to the project, feel free to open an issue or submit a pull request. Please follow our [contribution guidelines](CONTRIBUTING.md).
+### 4. **GRPC Layer (`CleanArchitectureDDD.GRPC`)**
+   - Exposes APIs via gRPC for efficient inter-service communication.
+   - **Key Components**:
+     - **Protos**: `.proto` files defining gRPC services.
+     - **Services**: Implementation of gRPC service logic.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### Folder Structure
+Below is the detailed project structure:
+
+CleanArchitectureDDD/
+├── CleanArchitectureDDD.Core/
+│   ├── Entities/
+│   │   ├── Car.cs
+│   │   ├── Client.cs
+│   │   └── ...
+│   ├── Interfaces/
+│   │   ├── IGenericRepository.cs
+│   │   └── ...
+│   ├── Specifications/
+│   │   ├── BaseSpecification.cs
+│   │   ├── ClientSpecification.cs
+│   │   └── ...
+│   └── ...
+├── CleanArchitectureDDD.App/
+│   ├── DTOs/
+│   │   ├── ClientDto.cs
+│   │   └── ...
+│   ├── Services/
+│   │   ├── ClientService.cs
+│   │   └── ...
+│   ├── Wrappers/
+│   │   ├── Response.cs
+│   │   └── ...
+│   └── ...
+├── CleanArchitectureDDD.Infrastructure/
+│   ├── Data/
+│   │   ├── ApplicationDbContext.cs
+│   │   ├── DbInitializer.cs
+│   │   └── ...
+│   ├── Repositories/
+│   │   ├── GenericRepository.cs
+│   │   └── ...
+│   ├── Migrations/
+│   │   └── ...
+│   └── ...
+├── CleanArchitectureDDD.GRPC/
+│   ├── Protos/
+│   │   ├── client.proto
+│   │   └── ...
+│   ├── Services/
+│   │   ├── ClientService.cs
+│   │   └── ...
+│   └── ...
+└── ...
+
+
+
+## Key Features
+- **Clean Architecture**: Ensures modularity and separation of concerns.
+- **gRPC Integration**: Offers high-performance RPC communication.
+- **Entity Framework**: Simplifies data access and migrations.
+- **Validation and Error Handling**: Provides robust exception handling and middleware.
+
+
+
