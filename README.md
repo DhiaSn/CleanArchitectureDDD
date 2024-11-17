@@ -1,7 +1,7 @@
-# CleanArchitectureDDD
+# Clean Architecture DDD 
 
 ## Overview
-CleanArchitectureDDD is a modular project implementing the Clean Architecture design pattern. The solution emphasizes separation of concerns and scalability, ensuring maintainability and testability.
+CleanArchitectureDDD is a modular project implementing the Clean Architecture design pattern. The solution emphasizes the separation of concerns and scalability, ensuring maintainability and testability.
 
 ## Project Structure
 The project is organized into four primary layers, each serving a distinct purpose:
